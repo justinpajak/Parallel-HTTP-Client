@@ -14,25 +14,25 @@
  * @return  -1 on error, otherwise the number of bytes written.
  **/
 ssize_t http_get(const URL *url, FILE *stream) {
-    /* TODO: Connect to remote host and port */
+    /* Connect to remote host and port */
     FILE *client_file = socket_dial(url->host, url->port);
     if (!client_file) {
         return -1;
     }
 
-    /* TODO: Send request to server */
+    /* Send request to server */
     fprintf(client_file, "GET /%s HTTP/1.0\r\n", url->path);
     fprintf(client_file, "Host: %s\r\n", url->host);
     fprintf(client_file, "\r\n");
 
-    /* TODO: Read response status from server */
+    /* Read response status from server */
     char buffer[BUFSIZ];
     fgets(buffer, BUFSIZ, client_file);
     if (strstr(buffer, "200 OK") == NULL) {
         return -1;
     }
 
-    /* TODO: Read response headers from server */
+    /* Read response headers from server */
     char headers[BUFSIZ];
     ssize_t c_length = 0;
     while (fgets(buffer, BUFSIZ, client_file) && strlen(buffer) > 2) {
@@ -41,7 +41,7 @@ ssize_t http_get(const URL *url, FILE *stream) {
         }
     }
 
-    /* TODO: Read response body from server */
+    /* Read response body from server */
     size_t bytes = 0;
     ssize_t tot = 0;
 
@@ -50,10 +50,10 @@ ssize_t http_get(const URL *url, FILE *stream) {
         fwrite(buffer, 1, bytes, stream);
     }
 
-    /* TODO: Close connection */
+    /* Close connection */
     fclose(client_file);
 
-    /* TODO: Return number of bytes written and check if it matches Content-Length */
+    /* Return number of bytes written and check if it matches Content-Length */
     if (c_length > 0 && c_length != tot) { 
         return -1;
     }

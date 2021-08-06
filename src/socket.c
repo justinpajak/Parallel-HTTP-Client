@@ -20,7 +20,7 @@
  * @return  Socket file stream of connection if successful, otherwise NULL.
  **/
 FILE *socket_dial(const char *host, const char *port) {
-    /* TODO: Lookup server address information */
+    /* Lookup server address information */
     struct addrinfo *results;
     struct addrinfo hints = {
         .ai_family = AF_UNSPEC,
@@ -32,7 +32,7 @@ FILE *socket_dial(const char *host, const char *port) {
         fprintf(stderr, "getaddrinfo failed: %s\n", gai_strerror(status));
         return NULL;
     }
-    /* TODO: For each server entry, allocate socket and try to connect */
+    /* For each server entry, allocate socket and try to connect */
     int client_fd = -1;
     for (struct addrinfo *p = results; p != NULL && client_fd < 0; p = p->ai_next) {
         if ((client_fd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) < 0) {
@@ -47,10 +47,10 @@ FILE *socket_dial(const char *host, const char *port) {
         }
     }
 
-    /* TODO: Release allocate address information */
+    /* Release allocate address information */
     freeaddrinfo(results);
 
-    /* TODO: Open file stream from socket file descriptor */
+    /* Open file stream from socket file descriptor */
     FILE *client_file = fdopen(client_fd, "r+");
     if (!client_file) {
         fprintf(stderr, "Unable to fdopen: %s\n", strerror(errno));

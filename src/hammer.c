@@ -24,7 +24,7 @@
  * @return  True if all children were successful.
  **/
 bool	hammer(const URL *url, FILE *stream, size_t n) {
-    /* TODO: Spawn children.
+    /* Spawn children.
      * Each child must do the following:
      *  1. Make a HTTP request to given URL.
      *  2. Time the HTTP request.
@@ -54,7 +54,7 @@ bool	hammer(const URL *url, FILE *stream, size_t n) {
         }
     }
      
-    /* TODO: Wait for children. */
+    /* Wait for children. */
     int all_status = 0;
     int child_status;
     for (int i = 0; i < n; i++) {
@@ -62,7 +62,7 @@ bool	hammer(const URL *url, FILE *stream, size_t n) {
         all_status += child_status;
     }
 
-    /* TODO: Print elapsed time to stderr. */
+    /* Print elapsed time to stderr. */
     double elapsed_time = timestamp() - time_start;
     fprintf(stderr, "Elapsed time: %0.2lf seconds\n", elapsed_time);
     return (all_status == 0);

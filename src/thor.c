@@ -21,7 +21,7 @@ void usage(int status) {
 /* Main Execution */
 
 int main(int argc, char *argv[]) {
-    /* TODO: Parse command line arguments */
+    /* Parse command line arguments */
     int hammerings = 1;
     int argind = 1;
     if (argc < 2) {
@@ -44,10 +44,10 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    /* TODO: Parse URL */
+    /* Parse URL */
     URL *u = url_parse(argv[argind]);
 
-    /* TODO: Hammer URL */
+    /* Hammer URL */
     if (hammer(u, stdout, hammerings)) {
         url_delete(u);
         return EXIT_SUCCESS;

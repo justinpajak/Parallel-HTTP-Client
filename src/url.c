@@ -19,11 +19,11 @@
  * @return  Parsed URL structure.
  **/
 URL*	url_parse(const char *url_string) {
-    /* TODO: Copy data to local buffer */
+    /* Copy data to local buffer */
     char buffer[BUFSIZ];
     strcpy(buffer, url_string); 
 
-    /* TODO: Skip scheme to host */
+    /* Skip scheme to host */
     char *host = strstr(buffer, HOST_DELIMITER);
     if (host) {
         host += strlen(HOST_DELIMITER);
@@ -31,7 +31,7 @@ URL*	url_parse(const char *url_string) {
         host = buffer;
     }
     
-    /* TODO: Split host:port from path */
+    /* Split host:port from path */
     char *path = strchr(host, PATH_DELIMITER);
     if (path) {
         *path = 0;
@@ -40,7 +40,7 @@ URL*	url_parse(const char *url_string) {
         path = "";
     }
 
-    /* TODO: Split host and port */
+    /* Split host and port */
     char *port = strchr(host, PORT_DELIMITER);
     if (!port) {
         port = "80";
@@ -49,13 +49,13 @@ URL*	url_parse(const char *url_string) {
         port += 1;
     }
 
-    /* TODO: Allocate URL structure */
+    /* Allocate URL structure */
     URL *u = (URL*)malloc(sizeof(URL));
     if (!u) {
         return NULL;
     }
 
-    /* TODO: Copy components to URL structure */
+    /* Copy components to URL structure */
     u->host = strdup(host);
     u->port = strdup(port);
     u->path = strdup(path);
@@ -69,7 +69,7 @@ URL*	url_parse(const char *url_string) {
  * @param   url     URL structure to deallocate.
  **/
 void	url_delete(URL *url) {
-    /* TODO: Release components and url */
+    /* Release components and url */
     free(url->host);
     free(url->port);
     free(url->path);
